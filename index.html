@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifa Headphone Xbox - 35 Números</title>
+    <title>Rifa Headset Xbox Sem Fio - 35 Números</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #107c10;
+            --primary-color: #107c10; /* Verde Xbox */
             --secondary-color: #5fc566;
             --dark-color: #1a1a1a;
             --light-color: #f5f5f5;
             --danger-color: #e81123;
             --success-color: #4bb543;
+            --highlight-color: #00a2ed; /* Azul Xbox */
         }
 
         * {
@@ -37,36 +39,135 @@
         header {
             text-align: center;
             margin-bottom: 30px;
+            position: relative;
+        }
+
+        .ribbon {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 8px 15px;
+            font-weight: bold;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transform: rotate(5deg);
+            z-index: 1;
         }
 
         header h1 {
             color: var(--primary-color);
             margin-bottom: 15px;
             font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        header h1:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--highlight-color));
+            border-radius: 3px;
+        }
+
+        .prize-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: center;
         }
 
         .prize-image {
-            max-width: 300px;
-            margin: 0 auto 20px;
+            flex: 1;
+            min-width: 300px;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .prize-image img {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.3s;
         }
 
-        .description {
-            font-size: 1.1rem;
+        .prize-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .prize-details {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .prize-title {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .prize-description {
+            font-size: 1rem;
             color: #555;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .prize-features {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        .prize-features li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .prize-features li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .prize-price {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 20px 0;
         }
 
         .status-container {
             margin-bottom: 30px;
             text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .progress-container {
+            margin-bottom: 15px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
         }
 
         .progress-bar {
@@ -74,15 +175,35 @@
             height: 20px;
             background-color: #e0e0e0;
             border-radius: 10px;
-            margin-bottom: 10px;
             overflow: hidden;
+            position: relative;
         }
 
         .progress {
             height: 100%;
-            background-color: var(--primary-color);
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             width: 0%;
             transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                           rgba(255,255,255,0.1) 0%, 
+                           rgba(255,255,255,0.3) 50%, 
+                           rgba(255,255,255,0.1) 100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .numbers-sold {
@@ -110,11 +231,12 @@
             transition: all 0.3s ease;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border: 2px solid transparent;
+            position: relative;
         }
 
         .number:hover {
             transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         }
 
         .number.available {
@@ -124,7 +246,7 @@
         }
 
         .number.sold {
-            background-color: #e0e0e0;
+            background-color: #f0f0f0;
             color: #999;
             cursor: not-allowed;
             position: relative;
@@ -148,20 +270,24 @@
         .number.selected {
             background-color: var(--primary-color);
             color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 0 3px rgba(16, 124, 16, 0.3);
         }
 
         .draw-info {
             background-color: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
             margin-bottom: 30px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: none;
         }
 
         .draw-info h2 {
             color: var(--primary-color);
             margin-bottom: 15px;
+            font-size: 1.8rem;
         }
 
         .countdown {
@@ -169,23 +295,31 @@
             justify-content: center;
             gap: 20px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .countdown-item {
             text-align: center;
+            min-width: 70px;
         }
 
-        .countdown-item span {
+        .countdown-value {
             font-size: 2rem;
             font-weight: 700;
             color: var(--primary-color);
             display: block;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            margin-bottom: 5px;
         }
 
-        .countdown-item p {
+        .countdown-label {
             font-size: 0.9rem;
             color: #666;
-            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         footer {
@@ -197,28 +331,67 @@
             font-size: 0.9rem;
         }
 
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .contact-button:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .contact-button i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
         /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
-            z-index: 100;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             overflow: auto;
+            backdrop-filter: blur(3px);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
             background-color: white;
             margin: 5% auto;
-            padding: 25px;
-            border-radius: 8px;
+            padding: 30px;
+            border-radius: 10px;
             width: 90%;
             max-width: 500px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
             position: relative;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .close-btn {
@@ -228,148 +401,217 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: #999;
+            transition: color 0.2s;
         }
 
         .close-btn:hover {
-            color: var(--dark-color);
+            color: var(--danger-color);
         }
 
         .modal h2 {
             color: var(--primary-color);
             margin-bottom: 20px;
             text-align: center;
+            font-size: 1.8rem;
         }
 
         .selected-number-info {
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
             text-align: center;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .selected-number-info p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .selected-number-info strong {
+            color: var(--primary-color);
+            font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 500;
+            color: #555;
         }
 
         .form-group input {
             width: 100%;
-            padding: 10px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(16, 124, 16, 0.2);
         }
 
         .btn {
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
+            padding: 14px 20px;
+            border-radius: 6px;
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
             width: 100%;
             margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn:hover {
             background-color: #0e6e0e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn i {
+            margin-right: 8px;
         }
 
         .payment-section {
             margin-top: 20px;
             text-align: center;
+            display: none;
+            animation: fadeInUp 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .payment-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .pix-key-container {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+            position: relative;
+        }
+
+        .pix-key {
+            font-size: 15px;
+            word-break: break-all;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 6px;
+            border: 1px dashed #ccc;
+            font-family: monospace;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: var(--highlight-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 3px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: #0088cc;
+        }
+
+        .pix-info {
+            font-size: 14px;
+            color: #6c757d;
+            margin: 8px 0;
+        }
+
+        .pix-info strong {
+            color: var(--dark-color);
         }
 
         .qrcode-container {
             margin: 20px auto;
-            padding: 15px;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            max-width: 250px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            max-width: 280px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
         }
 
-        .qrcode-container img {
+        .qrcode-img {
             width: 100%;
             height: auto;
-        }
-
-        .pix-key {
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 15px 0;
-            word-break: break-all;
+            display: block;
+            margin: 0 auto;
         }
 
         .instructions {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 15px;
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 15px;
+            line-height: 1.5;
         }
 
         .payment-confirmation {
-            margin-top: 20px;
+            margin-top: 25px;
             padding-top: 20px;
             border-top: 1px solid #eee;
         }
-        
-        /* Estilos para a seção de pagamento */
-.payment-section {
-    margin-top: 20px;
-    text-align: center;
-    animation: fadeIn 0.5s ease-out;
-}
 
-.pix-key {
-    background-color: #f8f9fa;
-    padding: 12px;
-    border-radius: 8px;
-    margin: 15px 0;
-    border: 1px solid #dee2e6;
-    font-size: 15px;
-}
+        .small-text {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
 
-.pix-info {
-    font-size: 14px;
-    color: #6c757d;
-    margin: 8px 0;
-}
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
 
-.qrcode-container {
-    margin: 20px auto;
-    padding: 15px;
-    background: white;
-    border-radius: 10px;
-    max-width: 280px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
+        .payment-method {
+            padding: 8px 15px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-.qrcode-img {
-    width: 100%;
-    height: auto;
-    border: 1px solid #eee;
-}
-
-.small-text {
-    font-size: 13px;
-    color: #6c757d;
-    margin-top: 8px;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        .payment-method i {
+            color: var(--primary-color);
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -377,9 +619,22 @@
                 grid-template-columns: repeat(5, 1fr);
             }
             
+            .prize-container {
+                flex-direction: column;
+            }
+            
             .modal-content {
                 margin: 10% auto;
                 width: 95%;
+                padding: 20px;
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+            }
+            
+            .countdown-value {
+                font-size: 1.8rem;
             }
         }
 
@@ -388,12 +643,25 @@
                 grid-template-columns: repeat(3, 1fr);
             }
             
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .prize-title {
+                font-size: 1.5rem;
+            }
+            
             .countdown {
                 gap: 10px;
             }
             
-            .countdown-item span {
+            .countdown-value {
                 font-size: 1.5rem;
+                padding: 8px;
+            }
+            
+            .countdown-label {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -401,92 +669,148 @@
 <body>
     <div class="container">
         <header>
-            <h1>Rifa Headphone Xbox</h1>
-            <div class="prize-image">
-                <img src="https://images5.kabum.com.br/produtos/fotos/sync_mirakl/479185/large/Headset-Gamer-Microsoft-Drive-40mm-Sem-Fio-Para-Xbox-One-Series-Preto-Tll-00008_1738691706.jpg" alt="Headphone Xbox">
+            <div class="ribbon">Rifa Ativa</div>
+            <h1>Rifa Headset Xbox Sem Fio</h1>
+            
+            <div class="prize-container">
+                <div class="prize-image">
+                    <img src="https://images5.kabum.com.br/produtos/fotos/sync_mirakl/479185/large/Headset-Gamer-Microsoft-Drive-40mm-Sem-Fio-Para-Xbox-One-Series-Preto-Tll-00008_1738691706.jpg" alt="Headset Xbox Sem Fio">
+                </div>
+                
+                <div class="prize-details">
+                    <h2 class="prize-title">Headset Xbox Sem Fio</h2>
+                    <p class="prize-description">
+                        Participe da rifa e concorra a este incrível Headset Xbox Sem Fio, com áudio espacial, microfone com redução de ruído e compatibilidade com Xbox Series X|S, Xbox One e Windows 10/11, Ps5, Nintendo switch e Celular.
+                    </p>
+                    
+                    <ul class="prize-features">
+                        <li>Áudio espacial para imersão total nos jogos</li>
+                        <li>Conexão sem fio via Xbox Wireless</li>
+                        <li>Microfone com redução de ruído</li>
+                        <li>Bateria com até 15 horas de duração</li>
+                        <li>Controles de áudio integrados</li>
+                        <li>Compatível com Xbox Series X|S, Xbox One e PC</li>
+                    </ul>
+                    
+                    <div class="prize-price">Valor por número: R$ 18,00</div>
+                    
+                    <a href="https://wa.me/5521987715733" class="contact-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Dúvidas? Fale conosco
+                    </a>
+                </div>
             </div>
-            <p class="description">Participe da rifa pelo valor de R$ 18,00 e concorra a um Headphone Xbox de última geração!</p>
         </header>
 
         <div class="status-container">
-            <div class="progress-bar">
-                <div class="progress" id="progress-bar"></div>
+            <h3>Progresso da Rifa</h3>
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span>Números vendidos</span>
+                    <span><span id="sold-count">0</span>/35</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="progress-bar"></div>
+                </div>
             </div>
-            <p class="numbers-sold"><span id="sold-count">0</span>/35 números vendidos</p>
+            <p class="numbers-sold">Faltam apenas <strong id="remaining-numbers">35</strong> números para o sorteio!</p>
         </div>
 
         <div class="numbers-grid" id="numbers-grid">
             <!-- Números serão gerados via JavaScript -->
         </div>
 
-<div class="modal" id="payment-modal">
-    <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h2>Finalizar Compra</h2>
-        <div class="selected-number-info">
-            <p>Você está comprando o número: <strong id="selected-number-display"></strong></p>
-            <p>Valor: <strong>R$ 18,00</strong></p>
-        </div>
-        
-        <form id="participant-form">
-            <div class="form-group">
-                <label for="name">Seu Nome Completo:</label>
-                <input type="text" id="name" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">WhatsApp (opcional):</label>
-                <input type="tel" id="phone">
-            </div>
-            <button type="submit" class="btn">Gerar QR Code PIX</button>
-        </form>
+        <div class="modal" id="payment-modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2><i class="fas fa-shopping-cart"></i> Finalizar Compra</h2>
+                
+                <div class="selected-number-info">
+                    <p>Você está comprando o número: <strong id="selected-number-display"></strong></p>
+                    <p>Valor: <strong>R$ 18,00</strong></p>
+                </div>
+                
+                <form id="participant-form">
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i> Seu Nome Completo:</label>
+                        <input type="text" id="name" required placeholder="Digite seu nome como consta no CPF">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> WhatsApp (para contato):</label>
+                        <input type="tel" id="phone" placeholder="(21) 98765-4321">
+                    </div>
+                    
+                    <button type="submit" class="btn">
+                        <i class="fas fa-qrcode"></i> Gerar QR Code PIX
+                    </button>
+                    
+                    <div class="payment-methods">
+                        <span class="payment-method">
+                            <i class="fab fa-cc-visa"></i> Cartão
+                        </span>
+                        <span class="payment-method">
+                            <i class="fas fa-barcode"></i> Boleto
+                        </span>
+                    </div>
+                </form>
 
-        <div class="payment-section" id="payment-section" style="display: none;">
-            <h3>Pagamento via PIX</h3>
-            <div class="pix-key">
-                Chave PIX: <strong>135.864.617-12</strong>
-                <p class="pix-info">Titular: Reinaldo Jose Leal Junior</p>
-                <p class="pix-info">Valor: <strong>R$ 18,00</strong></p>
-                <p class="pix-info">Número da rifa: <strong id="rifa-number-display"></strong></p>
-            </div>
-            
-            <div class="qrcode-container">
-                <img src="" id="qrcode-img" alt="QR Code PIX" class="qrcode-img">
-                <p class="instructions">Escaneie este QR Code no seu app bancário</p>
-            </div>
-            
-            <div class="payment-confirmation">
-                <button class="btn" id="confirm-payment">Confirmar Pagamento</button>
-                <p class="small-text">(Seu número será reservado após confirmação)</p>
+                <div class="payment-section" id="payment-section">
+                    <h3><i class="fas fa-money-bill-wave"></i> Pagamento via PIX</h3>
+                    
+                    <div class="pix-key-container">
+                        <p><strong>Chave PIX (CPF):</strong></p>
+                        <div class="pix-key">
+                            135.864.617-12
+                            <button class="copy-btn" onclick="copyToClipboard('135.864.617-12')">
+                                <i class="fas fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                        <p class="pix-info"><strong>Titular:</strong> Reinaldo Jose Leal Junior</p>
+                        <p class="pix-info"><strong>Valor:</strong> R$ 18,00</p>
+                        <p class="pix-info"><strong>Número da rifa:</strong> <span id="rifa-number-display"></span></p>
+                    </div>
+                    
+                    <div class="qrcode-container">
+                        <img src="" id="qrcode-img" alt="QR Code PIX" class="qrcode-img">
+                        <p class="instructions">Escaneie este QR Code no seu app bancário ou use a chave PIX acima</p>
+                    </div>
+                    
+                    <div class="payment-confirmation">
+                        <button class="btn" id="confirm-payment">
+                            <i class="fas fa-check-circle"></i> Confirmar Pagamento
+                        </button>
+                        <p class="small-text">Seu número será reservado por 1 hora após esta confirmação. Envie o comprovante para (21) 98771-5733.</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-        <div class="draw-info" id="draw-info" style="display: none;">
-            <h2>Sorteio</h2>
+        <div class="draw-info" id="draw-info">
+            <h2><i class="fas fa-trophy"></i> Sorteio</h2>
             <p>Todos os números foram vendidos! O sorteio será realizado em:</p>
             <div class="countdown" id="countdown">
                 <div class="countdown-item">
-                    <span id="days">00</span>
-                    <p>Dias</p>
+                    <span class="countdown-value" id="days">00</span>
+                    <p class="countdown-label">Dias</p>
                 </div>
                 <div class="countdown-item">
-                    <span id="hours">00</span>
-                    <p>Horas</p>
+                    <span class="countdown-value" id="hours">00</span>
+                    <p class="countdown-label">Horas</p>
                 </div>
                 <div class="countdown-item">
-                    <span id="minutes">00</span>
-                    <p>Minutos</p>
+                    <span class="countdown-value" id="minutes">00</span>
+                    <p class="countdown-label">Minutos</p>
                 </div>
                 <div class="countdown-item">
-                    <span id="seconds">00</span>
-                    <p>Segundos</p>
+                    <span class="countdown-value" id="seconds">00</span>
+                    <p class="countdown-label">Segundos</p>
                 </div>
             </div>
         </div>
 
         <footer>
+            <p>Esta rifa é 100% legal e segue as normas do artigo 3.019 do Código Civil Brasileiro</p>
             <p>Dúvidas? Entre em contato pelo WhatsApp: (21) 98771-5733</p>
+            <p>&copy; 2023 Rifa Headset Xbox - Todos os direitos reservados</p>
         </footer>
     </div>
 
@@ -513,12 +837,12 @@
         const numbersGrid = document.getElementById('numbers-grid');
         const progressBar = document.getElementById('progress-bar');
         const soldCount = document.getElementById('sold-count');
+        const remainingNumbers = document.getElementById('remaining-numbers');
         const paymentModal = document.getElementById('payment-modal');
         const closeBtn = document.querySelector('.close-btn');
         const selectedNumberDisplay = document.getElementById('selected-number-display');
         const participantForm = document.getElementById('participant-form');
         const paymentSection = document.getElementById('payment-section');
-        const qrcodeContainer = document.getElementById('qrcode-container');
         const confirmPaymentBtn = document.getElementById('confirm-payment');
         const drawInfo = document.getElementById('draw-info');
         const countdown = document.getElementById('countdown');
@@ -528,6 +852,7 @@
         let totalNumbers = 35;
         let soldNumbers = 0;
         let drawDate = null;
+        let currentPaymentData = null;
 
         // Inicializar a aplicação
         function initApp() {
@@ -558,11 +883,21 @@
             const numberElement = document.querySelector(`.number[data-number="${number}"]`);
             
             if (numberElement.classList.contains('sold')) {
+                alert('Este número já foi vendido. Por favor, escolha outro.');
                 return;
             }
             
+            // Remover seleção anterior
+            const previouslySelected = document.querySelector('.number.selected');
+            if (previouslySelected) {
+                previouslySelected.classList.remove('selected');
+            }
+            
+            // Selecionar novo número
             selectedNumber = number;
+            numberElement.classList.add('selected');
             selectedNumberDisplay.textContent = number;
+            document.getElementById('rifa-number-display').textContent = number;
             openModal();
         }
 
@@ -570,14 +905,39 @@
         function openModal() {
             paymentModal.style.display = 'block';
             paymentSection.style.display = 'none';
-            participantForm.reset();
             participantForm.style.display = 'block';
+            participantForm.reset();
+            document.body.style.overflow = 'hidden'; // Impede rolagem da página
         }
 
         // Fechar modal
         function closeModal() {
             paymentModal.style.display = 'none';
             selectedNumber = null;
+            document.body.style.overflow = ''; // Restaura rolagem
+            
+            // Remover seleção do número
+            const selectedElement = document.querySelector('.number.selected');
+            if (selectedElement) {
+                selectedElement.classList.remove('selected');
+            }
+        }
+
+        // Copiar chave PIX para área de transferência
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Chave PIX copiada com sucesso!');
+            }).catch(err => {
+                console.error('Erro ao copiar:', err);
+                // Fallback para navegadores mais antigos
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('Chave PIX copiada!');
+            });
         }
 
         // Configurar event listeners
@@ -614,134 +974,139 @@
                 registerPayment(name, phone, selectedNumber);
             });
         }
-// Gerador de QR Code PIX funcional
-function generatePixQRCode(name, phone) {
-    const selectedNumber = document.getElementById('selected-number-display').textContent;
-    
-    // Seu código PIX corrigido e completo
-    const pixCode = "00020126330014br.gov.bcb.pix0111135864617125204000053039865802BR5925Reinaldo Jose Leal Junior6009Sao Paulo62290525REC67EAF854AFB0D94813016163041E7B";
-    
-    // URL para gerar o QR Code
-    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(pixCode)}`;
-    
-    // Atualiza a imagem do QR Code
-    const qrcodeImg = document.getElementById('qrcode-img');
-    qrcodeImg.src = qrCodeUrl;
-    
-    // Mostra o número da rifa para referência
-    document.getElementById('rifa-number-display').textContent = selectedNumber;
-    
-    // Exibe a seção de pagamento
-    participantForm.style.display = 'none';
-    paymentSection.style.display = 'block';
-    
-    // Adiciona o número da rifa aos dados que serão salvos
-    currentPaymentData = {
-        name: name,
-        phone: phone || '',
-        number: selectedNumber,
-        pixCode: pixCode,
-        timestamp: new Date()
-    };
-}
 
-// Função para calcular CRC16 (necessária para o PIX)
-function calculateCRC16(data) {
-    let crc = 0xFFFF;
-    for (let i = 0; i < data.length; i++) {
-        crc ^= data.charCodeAt(i) << 8;
-        for (let j = 0; j < 8; j++) {
-            crc = crc & 0x8000 ? (crc << 1) ^ 0x1021 : crc << 1;
+        // Gerador de QR Code PIX funcional
+        function generatePixQRCode(name, phone) {
+            // Dados completos para o PIX
+            const pixData = {
+                payloadFormatIndicator: '01',
+                pointOfInitiationMethod: '12',
+                merchantAccountInformation: {
+                    gui: 'br.gov.bcb.pix',
+                    key: '13586461712',
+                    description: 'Rifa Headset Xbox'
+                },
+                merchantCategoryCode: '7999',
+                transactionCurrency: '986',
+                transactionAmount: '18.00',
+                countryCode: 'BR',
+                merchantName: 'Reinaldo Jose Leal Junior',
+                merchantCity: 'Sao Paulo',
+                additionalDataField: {
+                    reference: 'Rifa' + selectedNumber.toString().padStart(2, '0')
+                }
+            };
+            
+            // Gerar o payload do PIX
+            const payload = generatePixPayload(pixData);
+            
+            // URL para gerar o QR Code
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(payload)}`;
+            
+            // Atualiza a imagem do QR Code
+            const qrcodeImg = document.getElementById('qrcode-img');
+            qrcodeImg.src = qrCodeUrl;
+            
+            // Mostra o número da rifa para referência
+            document.getElementById('rifa-number-display').textContent = selectedNumber;
+            
+            // Exibe a seção de pagamento
+            participantForm.style.display = 'none';
+            paymentSection.style.display = 'block';
+            
+            // Salva os dados para registro posterior
+            currentPaymentData = {
+                name: name,
+                phone: phone || '',
+                number: selectedNumber,
+                pixCode: payload,
+                timestamp: new Date()
+            };
         }
-    }
-    return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
-}
 
-// Registrar pagamento no Firebase
-function registerPayment(name, phone, number) {
-    const participantData = {
-        name: name,
-        phone: phone || '',
-        number: parseInt(number),
-        paymentConfirmed: true,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        paymentMethod: 'PIX',
-        paymentVerified: false // Você pode marcar como true depois de confirmar
-    };
-    
-    db.collection('participants').doc(number.toString()).set(participantData)
-        .then(() => {
-            alert('Obrigado pela compra! Verificaremos seu pagamento em breve.');
-            closeModal();
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert('Erro no registro. Por favor, entre em contato conosco.');
-        });
-}
+        // Função para gerar o payload do PIX
+        function generatePixPayload(data) {
+            let payload = '';
+            
+            // Adiciona campos obrigatórios
+            payload += addEMVField('00', data.payloadFormatIndicator);
+            payload += addEMVField('01', data.pointOfInitiationMethod);
+            
+            // Informações da conta do merchant
+            let merchantAccount = '';
+            merchantAccount += addEMVField('00', 'br.gov.bcb.pix');
+            merchantAccount += addEMVField('01', data.merchantAccountInformation.key);
+            if (data.merchantAccountInformation.description) {
+                merchantAccount += addEMVField('02', data.merchantAccountInformation.description);
+            }
+            payload += addEMVField('26', merchantAccount);
+            
+            // Adiciona campos restantes
+            payload += addEMVField('52', data.merchantCategoryCode);
+            payload += addEMVField('53', data.transactionCurrency);
+            payload += addEMVField('54', data.transactionAmount);
+            payload += addEMVField('58', data.countryCode);
+            payload += addEMVField('59', data.merchantName);
+            payload += addEMVField('60', data.merchantCity);
+            
+            // Campo adicional (referência)
+            if (data.additionalDataField) {
+                let additionalData = addEMVField('05', data.additionalDataField.reference);
+                payload += addEMVField('62', additionalData);
+            }
+            
+            // Adiciona CRC16
+            payload += '6304';
+            const crc = calculateCRC16(payload + '6304');
+            payload += crc;
+            
+            return payload;
+        }
 
-// Registrar pagamento (mantido igual)
-function registerPayment(name, phone, number) {
-    const participantData = {
-        name: name,
-        phone: phone || '',
-        number: parseInt(number),
-        paymentConfirmed: true,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        paymentVerified: false
-    };
-    
-    db.collection('participants').doc(number.toString()).set(participantData)
-        .then(() => {
-            alert('Pagamento registrado com sucesso!');
-            closeModal();
-        })
-        .catch(error => {
-            console.error('Erro ao registrar pagamento:', error);
-            alert('Ocorreu um erro. Por favor, tente novamente.');
-        });
-}
+        // Função auxiliar para formatar campos EMV
+        function addEMVField(id, value) {
+            const length = value.toString().length.toString().padStart(2, '0');
+            return id + length + value;
+        }
 
-// Registrar pagamento (mantenha o existente, mas atualize os dados)
-function registerPayment(name, phone, number) {
-    const participantData = {
-        name: name,
-        phone: phone || '',
-        number: number,
-        paymentConfirmed: true,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        paymentVerified: false // Você pode marcar como true depois de confirmar o recebimento
-    };
-    
-    db.collection('participants').doc(number.toString()).set(participantData)
-        .then(() => {
-            alert('Pagamento registrado! Verificaremos o recebimento em breve.');
-            closeModal();
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert('Erro ao registrar. Tente novamente.');
-        });
-}
+        // Função para calcular CRC16 (necessária para o PIX)
+        function calculateCRC16(data) {
+            let crc = 0xFFFF;
+            for (let i = 0; i < data.length; i++) {
+                crc ^= data.charCodeAt(i) << 8;
+                for (let j = 0; j < 8; j++) {
+                    crc = crc & 0x8000 ? (crc << 1) ^ 0x1021 : crc << 1;
+                }
+            }
+            return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+        }
 
         // Registrar pagamento no Firebase
         function registerPayment(name, phone, number) {
+            if (!currentPaymentData) {
+                alert('Erro nos dados de pagamento. Por favor, recarregue a página e tente novamente.');
+                return;
+            }
+            
             const participantData = {
                 name: name,
                 phone: phone || '',
-                number: number,
+                number: parseInt(number),
                 paymentConfirmed: true,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                paymentMethod: 'PIX',
+                paymentVerified: false,
+                pixCode: currentPaymentData.pixCode
             };
             
             db.collection('participants').doc(number.toString()).set(participantData)
                 .then(() => {
-                    alert('Pagamento confirmado! Obrigado por participar.');
+                    alert('Obrigado pela compra! Seu número foi reservado. Envie o comprovante para (21) 98771-5733 para confirmação.');
                     closeModal();
                 })
                 .catch(error => {
-                    console.error('Erro ao registrar pagamento:', error);
-                    alert('Ocorreu um erro ao registrar seu pagamento. Por favor, tente novamente.');
+                    console.error('Erro:', error);
+                    alert('Erro no registro. Por favor, entre em contato conosco.');
                 });
         }
 
@@ -749,8 +1114,7 @@ function registerPayment(name, phone, number) {
         function listenForChanges() {
             db.collection('participants').onSnapshot((snapshot) => {
                 soldNumbers = snapshot.size;
-                soldCount.textContent = soldNumbers;
-                progressBar.style.width = `${(soldNumbers / totalNumbers) * 100}%`;
+                updateUI();
                 
                 snapshot.docChanges().forEach(change => {
                     const number = change.doc.id;
@@ -776,6 +1140,13 @@ function registerPayment(name, phone, number) {
             });
         }
 
+        // Atualizar UI com dados atuais
+        function updateUI() {
+            soldCount.textContent = soldNumbers;
+            remainingNumbers.textContent = totalNumbers - soldNumbers;
+            progressBar.style.width = `${(soldNumbers / totalNumbers) * 100}%`;
+        }
+
         // Verificar status do sorteio
         function checkDrawStatus() {
             if (soldNumbers >= totalNumbers) {
@@ -785,7 +1156,7 @@ function registerPayment(name, phone, number) {
                 } else {
                     drawInfo.style.display = 'block';
                     drawInfo.innerHTML = `
-                        <h2>Sorteio</h2>
+                        <h2><i class="fas fa-trophy"></i> Sorteio</h2>
                         <p>Todos os números foram vendidos! A data do sorteio será anunciada em breve.</p>
                     `;
                 }
